@@ -11,6 +11,11 @@ RUN /bd_build/prepare.sh && \
 	/bd_build/utilities.sh && \
 	/bd_build/cleanup.sh
 
+## Install an SSH of your choice.
+RUN rm -f /etc/service/sshd/down
+COPY your_key.pub /tmp/your_key.pub
+RUN cat /tmp/your_key.pub >> /root/.ssh/authorized_keys && rm -f /tmp/your_key.pub
+
 ENV DEBIAN_FRONTEND="teletype" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
